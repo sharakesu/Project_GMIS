@@ -35,6 +35,11 @@ namespace GMIS
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
             groupListbox.Items.Clear();
             for (int i = 0; i < studentGroupDBLoad.GetData().Count; i++)
             {
@@ -46,15 +51,6 @@ namespace GMIS
             {
                 classComboBox.Items.Add(classDBLoad.GetComboData()[i]);
             }
-        }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-            //groupListbox.Items.Clear();
-            //for (int i = 0; i < studentGroupDBLoad.GetData().Count; i++)
-            //{
-            //    groupListbox.Items.Add(studentGroupDBLoad.GetData()[i]);
-            //}
         }
 
         private void grpListView_Loaded(object sender, RoutedEventArgs e)
@@ -78,6 +74,50 @@ namespace GMIS
         private void classComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            //ObservableCollection<ClassWithGroupModel> classWithGroups = classDBLoad.LoadClassWithGroup();
+            //groupListbox.Items.Clear();
+            //String classID = String.Concat(classComboBox.Text.Where(c => !Char.IsWhiteSpace(c)));
+
+            ////int classID = classComboBox.SelectedIndex;
+            //MessageBox.Show("" + classComboBox.SelectedItem);
+
+            //if (classWithGroups.Count() != 0)
+            //{
+            //    for (int i = 0; i < classWithGroups.Count; i++)
+            //    {
+            //        if (classWithGroups[i].group_id == Convert.ToInt64(classComboBox.SelectedItem))
+            //        {
+            //            groupListbox.Items.Add(classWithGroups[i]);
+            //        }
+            //    }
+            //}
+
+            //groupListbox.Items.Clear();
+            //for (int i = 0; i < classDBLoad.LoadClassWithGroup().Count; i++)
+            //{
+
+            //    groupListbox.Items.Add(classDBLoad.LoadClassWithGroup()[i]);
+            //}
+
+
+            ObservableCollection<ClassWithGroupModel> classWithGroups = classDBLoad.LoadClassWithGroup();
+            groupListbox.Items.Clear();
+            String classID = String.Concat(classComboBox.SelectedItem.ToString().Where(c => !Char.IsWhiteSpace(c)));
+
+
+            if (classWithGroups.Count() != 0)
+            {
+                for (int i = 0; i < classWithGroups.Count; i++)
+                {
+                   
+
+                    if (classWithGroups[i].class_id== Convert.ToInt64(classID))
+                    {
+                        groupListbox.Items.Add(classWithGroups[i]);
+                    }
+                }
+
+            }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -87,13 +127,21 @@ namespace GMIS
             String groupID = String.Concat(searchBox.Text.Where(c => !Char.IsWhiteSpace(c)));
             if(searchBox.Text != "")
             {
-                if (studentGroups.Count() != 0)
+                if (System.Text.RegularExpressions.Regex.IsMatch(searchBox.Text, "[^0-9]"))
                 {
-                    for (int i = 0; i < studentGroups.Count; i++)
+                    MessageBox.Show("Please enter Group ID.");
+                    searchBox.Text = searchBox.Text.Remove(searchBox.Text.Length - 1);
+                }
+                else
+                {
+                    if (studentGroups.Count() != 0)
                     {
-                        if (studentGroups[i].group_id == Convert.ToInt64(groupID))
+                        for (int i = 0; i < studentGroups.Count; i++)
                         {
-                            groupListbox.Items.Add(studentGroups[i]);
+                            if (studentGroups[i].group_id == Convert.ToInt64(groupID))
+                            {
+                                groupListbox.Items.Add(studentGroups[i]);
+                            }
                         }
                     }
                 }
@@ -116,6 +164,9 @@ namespace GMIS
            
         }
 
-        
+        private void groupListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DetailsPanel.DataContext = classComboBox.SelectedItem;
+        }
     }
 }

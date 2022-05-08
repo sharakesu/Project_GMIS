@@ -125,5 +125,54 @@ namespace GMIS
             return classs;
         }
 
+
+        public static ObservableCollection<ClassWithGroupModel> LoadClassWithGroup()
+        {
+            ObservableCollection<ClassWithGroupModel> classWithGroups = new ObservableCollection<ClassWithGroupModel>();
+
+            // Declare a data reader
+            MySqlDataReader? rdr = null;
+
+            try
+            {
+                // Instantiate a connection
+                conn = GetConnection();
+                // Open the connection
+                conn.Open();
+
+                // 1. Instantiate a new command with a query and connection
+                MySqlCommand cmd = new MySqlCommand("SELECT * from class c inner join studentGroup sg on c.group_id = sg.group_id", conn);
+
+                // 2. Call Execute reader to get query results
+                rdr = cmd.ExecuteReader();
+
+                // print the CategoryName of each record
+                while (rdr.Read())
+                {
+                    ClassWithGroupModel cwg = new ClassWithGroupModel { class_id = rdr.GetInt32("class_id"), group_id = rdr.GetInt32("group_id"), group_name =rdr.GetString("group_name") };
+                    classWithGroups.Add(cwg);
+                }
+            }
+            catch (MySqlException cwg)
+            {
+                Console.WriteLine("Error connecting to database: " + cwg);
+            }
+            finally
+            {
+                // close the reader
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+
+                // Close the connection
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return classWithGroups;
+        }
+
     }
 }
