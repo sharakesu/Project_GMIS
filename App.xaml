@@ -2,16 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GMIS"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Login.xaml">
     <Application.Resources>
-        <local:StudentGroupDBLoad x:Key="group_controller"/>
-        <!-- The ObjectDataProvider Key will be refered in the controls -->
-        <ObjectDataProvider x:Key="group_list"
-                            ObjectInstance="{StaticResource group_controller}"
-                            MethodName="GetData">
-        </ObjectDataProvider>
-
-
+      
         <local:ClassDBLoad x:Key="class_controller"/>
         <!-- The ObjectDataProvider Key will be refered in the controls -->
         <ObjectDataProvider x:Key="class_list"

@@ -51,7 +51,7 @@ namespace GMIS
                 // print the CategoryName of each record
                 while (rdr.Read())
                 {
-                    StudentGroupModel g = new StudentGroupModel { group_id = rdr.GetInt32(0), group_name = rdr.GetString(1) };
+                    StudentGroupModel g = new StudentGroupModel { group_id = rdr.GetInt32("group_id "), group_name = rdr.GetString("group_name") };
                     groups.Add(g);
                 }
             }
@@ -172,6 +172,106 @@ namespace GMIS
                 }
             }
             return classWithGroups;
+        }
+
+
+        public static ObservableCollection<StudentModel> LoadStudents()
+        {
+            ObservableCollection<StudentModel> students = new ObservableCollection<StudentModel>();
+
+            // Declare a data reader
+            MySqlDataReader? rdr = null;
+
+            try
+            {
+                // Instantiate a connection
+                conn = GetConnection();
+                // Open the connection
+                conn.Open();
+
+                // 1. Instantiate a new command with a query and connection
+                MySqlCommand cmd = new MySqlCommand("select * from student s inner join studentGroup sg on s.group_id = sg.group_id", conn);
+
+                // 2. Call Execute reader to get query results
+                rdr = cmd.ExecuteReader();
+
+                // print the CategoryName of each record
+                while (rdr.Read())
+                {
+                    StudentModel stu = new StudentModel {  group_id = rdr.GetInt32("group_id"), student_id= rdr.GetInt32("student_id"), given_name = rdr.GetString("given_name") ,
+                                                         family_name  = rdr.GetString("family_name") ,title = rdr.GetString("title"), campus = rdr.GetString("campus") , phone = rdr.GetString("phone"),
+                                                            email = rdr.GetString("email") , category = rdr.GetString("category")   };
+                    students.Add(stu);
+                }
+            }
+            catch (MySqlException stu)
+            {
+                Console.WriteLine("Error connecting to database: " + stu);
+            }
+            finally
+            {
+                // close the reader
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+
+                // Close the connection
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return students;
+        }
+
+
+        public static ObservableCollection<GroupIDOnlyModel> LoadGroupID()
+        {
+            ObservableCollection<GroupIDOnlyModel> groupIDs = new ObservableCollection<GroupIDOnlyModel>();
+
+            // Declare a data reader
+            MySqlDataReader? rdr = null;
+
+            try
+            {
+                // Instantiate a connection
+                conn = GetConnection();
+                // Open the connection
+                conn.Open();
+
+                // 1. Instantiate a new command with a query and connection
+                MySqlCommand cmd = new MySqlCommand("SELECT group_id FROM studentGroup", conn);
+
+                // 2. Call Execute reader to get query results
+                rdr = cmd.ExecuteReader();
+
+                // print the CategoryName of each record
+                while (rdr.Read())
+                {
+                    GroupIDOnlyModel grp = new GroupIDOnlyModel { group_id = rdr.GetInt32("group_id") };
+                    groupIDs.Add(grp);
+                }
+            }
+            catch (MySqlException grp)
+            {
+                Console.WriteLine("Error connecting to database: " + grp);
+            }
+            finally
+            {
+                // close the reader
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+
+                // Close the connection
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return groupIDs;
         }
 
     }

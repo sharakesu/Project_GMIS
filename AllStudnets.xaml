@@ -1,0 +1,22 @@
+﻿<Window x:Class="GMIS.AllStudnets"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GMIS"
+        mc:Ignorable="d"
+        Title="AllStudnets" Height="450" Width="800">
+    <Grid Loaded="Grid_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="207*"/>
+            <RowDefinition Height="227*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="45,33,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" TextChanged="TextBox_TextChanged"/>
+        <ListBox x:Name="groupListbox" Margin="45,104,578,29" SelectionChanged="groupListbox_SelectionChanged" Grid.RowSpan="2"/>
+        <ListBox x:Name="studentListBox" Grid.RowSpan="2" Margin="254,33,34,29"/>
+        <Label Content="Search Here" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.335,0.489"/>
+        <Label Content="Student Details" HorizontalAlignment="Left" Margin="494,5,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.335,0.489"/>
+        <Label Content="Group ID List" HorizontalAlignment="Left" Margin="45,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.335,0.489"/>
+
+    </Grid>
+</Window>

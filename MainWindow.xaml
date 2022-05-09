@@ -7,17 +7,12 @@
         mc:Ignorable="d"
         Title="Student Group" Height="450" Width="800">
     <Grid Loaded="Grid_Loaded">
-        <TextBox x:Name="searchBox" Text="" HorizontalAlignment="Left" Margin="35,31,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="154" Height="20" TextChanged="TextBox_TextChanged" KeyUp="TextBox_KeyUp"/>
-        <ListBox x:Name="groupListbox" Margin="35,79,340,36" SelectionChanged="groupListbox_SelectionChanged"/>
-        <ComboBox x:Name="classComboBox" HorizontalAlignment="Center" Margin="0,29,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="classComboBox_SelectionChanged"/>
-       
+        <TextBox x:Name="searchBox" Text="" HorizontalAlignment="Left" Margin="35,37,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Height="20" TextChanged="TextBox_TextChanged" KeyUp="TextBox_KeyUp"/>
+        <ListBox x:Name="groupListbox" Margin="35,79,30,36" SelectionChanged="groupListbox_SelectionChanged"/>
+        <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="650,35,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="classComboBox_SelectionChanged"/>
+
         <Label Content="Search Here" HorizontalAlignment="Left" Margin="33,6,0,0" VerticalAlignment="Top"/>
-        <StackPanel  x:Name="DetailsPanel" Margin="488,29,32,36">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Class ID: " HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
-                <Label Content="{Binding Path=group_id}"/>
-            </StackPanel>
-        </StackPanel>
+        <Label Content="Filter by class ID" HorizontalAlignment="Left" Margin="650,5,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
