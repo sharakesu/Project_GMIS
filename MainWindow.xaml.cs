@@ -138,31 +138,35 @@ namespace GMIS
 
         private void groupListbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ObservableCollection<StudentModel> studentDetail = classDBLoad.LoadStudents();
-           
+
+        
+            ObservableCollection<StudentModel> studentDetail = classDBLoad.LoadStudents();
+
+            studentListBox.Items.Clear();
+            if (groupListbox.SelectedItem != null)
+            {
+
+                String groupID = String.Concat(groupListbox.SelectedItem.ToString().Where(c => !Char.IsWhiteSpace(c)));
+                groupID = groupID.Substring(9, 3);
+                groupID = groupID.Replace(",",String.Empty);
+
+                
+
+                if (studentDetail.Count() != 0)
+                {
+                    for (int i = 0; i < studentDetail.Count; i++)
+                    {
 
 
-            //if (groupListbox.SelectedItem != null)
-            //{
+                        if (studentDetail[i].group_id == Convert.ToInt64(groupID))
+                        {
+                            studentListBox.Items.Add(studentDetail[i]);
+                        }
+                    }
 
-            //    String groupID = String.Concat(groupListbox.SelectedItem.ToString().Where(c => !Char.IsWhiteSpace(c)));
+                }
 
-
-            //    if (studentDetail.Count() != 0)
-            //    {
-            //        for (int i = 0; i < studentDetail.Count; i++)
-            //        {
-
-
-            //            if (studentDetail[i].group_id == Convert.ToInt64(groupID))
-            //            {
-            //                studentListBox.Items.Add(studentDetail[i]);
-            //            }
-            //        }
-
-            //    }
-
-            //}
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

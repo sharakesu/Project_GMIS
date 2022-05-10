@@ -51,7 +51,7 @@ namespace GMIS
                 // print the CategoryName of each record
                 while (rdr.Read())
                 {
-                    StudentGroupModel g = new StudentGroupModel { group_id = rdr.GetInt32("group_id "), group_name = rdr.GetString("group_name") };
+                    StudentGroupModel g = new StudentGroupModel { group_id = rdr.GetInt32("group_id"), group_name = rdr.GetString("group_name") };
                     groups.Add(g);
                 }
             }

@@ -15,26 +15,25 @@ using System.Windows.Shapes;
 namespace GMIS
 {
     /// <summary>
-    /// Interaction logic for BachelorForm.xaml
+    /// Interaction logic for MainForm.xaml
     /// </summary>
-    public partial class BachelorForm : Window
+    public partial class MainForm : Window
     {
-        public BachelorForm()
+        public MainForm()
         {
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AllStudnets allStudnets = new AllStudnets();
-            allStudnets.Show();
+            MainWindow main = new MainWindow();
+            main.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Login log = new Login();
-            log.Show();
-            this.Hide();
+            AllStudnets allStudnets = new AllStudnets();
+            allStudnets.Show();
         }
     }
 }

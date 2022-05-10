@@ -34,7 +34,7 @@ namespace GMIS
 
         public override string ToString()
         {
-            return $"Class ID : {class_id} - Group ID : {group_id} - Group Name : {group_name}";
+            return $"group_id:{ group_id}, group_name:{group_name}";
         }
 
     }

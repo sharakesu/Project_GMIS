@@ -8,11 +8,12 @@
         Title="Student Group" Height="450" Width="800">
     <Grid Loaded="Grid_Loaded">
         <TextBox x:Name="searchBox" Text="" HorizontalAlignment="Left" Margin="35,37,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="188" Height="20" TextChanged="TextBox_TextChanged" KeyUp="TextBox_KeyUp"/>
-        <ListBox x:Name="groupListbox" Margin="35,79,30,36" SelectionChanged="groupListbox_SelectionChanged"/>
+        <ListBox x:Name="groupListbox" Margin="35,79,497,36" SelectionChanged="groupListbox_SelectionChanged"/>
         <ComboBox x:Name="classComboBox" HorizontalAlignment="Left" Margin="650,35,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="classComboBox_SelectionChanged"/>
 
         <Label Content="Search Here" HorizontalAlignment="Left" Margin="33,6,0,0" VerticalAlignment="Top"/>
         <Label Content="Filter by class ID" HorizontalAlignment="Left" Margin="650,5,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="studentListBox" Margin="332,79,30,36"/>
 
     </Grid>
 </Window>
